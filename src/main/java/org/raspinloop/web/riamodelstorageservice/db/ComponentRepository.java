@@ -1,7 +1,10 @@
 package org.raspinloop.web.riamodelstorageservice.db;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-interface  ComponentRepository  extends JpaRepository<Component, Long> {
-
+@Repository
+public interface  ComponentRepository  extends CrudRepository<Component, Long> {
+	public Component findBycomponentId(String componentId);
+	public Long deleteByComponentId(String componentId);
 }

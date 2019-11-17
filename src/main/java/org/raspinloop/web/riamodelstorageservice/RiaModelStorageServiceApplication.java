@@ -9,5 +9,4 @@ public class RiaModelStorageServiceApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(RiaModelStorageServiceApplication.class, args);
 	}
-
 }

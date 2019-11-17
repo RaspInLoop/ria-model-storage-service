@@ -2,23 +2,35 @@ package org.raspinloop.web.riamodelstorageservice.db;
 
 import java.util.Set;
 
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-
-import org.raspinloop.server.model.IPort;
-import org.raspinloop.server.model.IPortGroupDefinition;
+import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 import lombok.Data;
 
 @Data
+@Entity
 public class PortGroup {
 
-	private @Id @GeneratedValue Long id;
-	private Set<IPort> ports;
-	private IPortGroupDefinition definition;
+	@Id
+	@GeneratedValue
+	private Long id;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "group")
+	private Set<Port> ports;
+	
+	@ManyToMany(mappedBy = "portGroups")
+	private Set<Component> usedBy;
+	
 	private String Name;
-	private String svg;
-
+	
+	@Lob
+	private String svg;	
+	
 	public PortGroup() {
 	}
 

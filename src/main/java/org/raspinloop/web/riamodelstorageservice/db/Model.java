@@ -6,8 +6,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-import org.raspinloop.server.model.ILink;
-
 import lombok.Data;
 
 @Data
@@ -20,9 +18,8 @@ public class Model {
 	String description;
 	String authorId;
 	String creationDate;
-	ArrayList<Component> componentsInstances;
-	ArrayList<ILink> links;
-
+	ArrayList<Instance> componentsInstances;
+	
 	public Model() {
 	}
 	

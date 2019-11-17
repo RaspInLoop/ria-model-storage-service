@@ -1,0 +1,3 @@
+mutation($inst: ID!){
+  deleteInstance(id: $inst)
+}

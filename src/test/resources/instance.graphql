@@ -1,0 +1,7 @@
+query($inst: ID!){
+  instance(id: $inst){
+    id
+    name
+    parameters
+  }
+}

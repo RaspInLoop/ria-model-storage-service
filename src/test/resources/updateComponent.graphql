@@ -1,0 +1,12 @@
+mutation($comp: ComponentInput!){
+  updateComponent(component: $comp){
+   componentId
+    svgIcon
+     portGroups {
+      svg
+      ports {
+        portId
+      }      
+    }
+  }
+}

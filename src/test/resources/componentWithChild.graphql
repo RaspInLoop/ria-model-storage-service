@@ -1,0 +1,12 @@
+query($comp: String!){
+  component(componentId: $comp){
+    componentId
+    svgIcon
+     portGroups {
+      svg
+      ports {
+        portId
+      }      
+    }
+  }
+}

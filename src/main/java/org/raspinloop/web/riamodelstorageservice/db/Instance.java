@@ -12,24 +12,19 @@ import lombok.Data;
 
 @Data
 @Entity
-public class Port {
+public class Instance {
 
+	public Instance() {
+	}
 	private @Id @GeneratedValue Long id;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "portgroup_id")
-	private PortGroup group;
+	private String instanceName;
 	
-	String portId;
-	
-	int x;
-	
-	int y;
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "component_id", nullable = false)
+	private Component componentRef;
 	
 	@Lob
-	String description;
-
-	public Port() {
-	}
-
+	private String parameters;
+	
 }

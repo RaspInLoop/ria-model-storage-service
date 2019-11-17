@@ -1,0 +1,80 @@
+type Component {
+    id: ID!
+    componentId: String!
+    description: String
+    svgContent: String
+    svgIcon: String!
+    htmlDocumentation: String
+    parameters: String
+    portGroups: [PortGroup!]!
+    
+}
+
+type Instance {
+    id: ID!
+    name: String!
+    parameters: String
+    component: Component!
+}
+
+type PortGroup {	
+	name: String!
+	svg: String!
+	ports: [Port!]!
+}
+
+type Port {	
+	portId: String!
+	x : Int!
+	y : Int!
+    description: String
+}
+
+ 
+# The Root Query for the application
+type Query {
+    component(componentId: String!): Component
+    components: [Component!]!
+    instance(id : ID!): Instance
+}
+ 
+input ComponentInput {
+    id: ID
+    componentId: String!
+    description: String
+    svgContent: String
+    svgIcon: String!
+    htmlDocumentation: String
+    parameters: String
+    portGroups: [PortGroupInput!]
+    
+}
+
+input  InstanceInput {
+    id: ID!
+    name: String!
+    parameters: String
+    componentId: String!
+}
+
+input  PortGroupInput {	
+	name: String!
+	svg: String!
+	ports: [PortInput!]
+}
+
+input  PortInput {	
+	portId: String!
+	x : Int!
+	y : Int!
+    description: String
+} 
+ 
+# The Root Mutation for the application
+type Mutation {
+    deleteComponent(componentId: String!): Boolean!
+    updateComponent(component: ComponentInput!) : Component!
+    createInstance(name: String!, componentId: String!) : ID!
+    deleteInstance(id : ID!): Boolean!
+    updateInstance(instance : InstanceInput!) : Instance!    
+}

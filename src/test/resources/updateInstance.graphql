@@ -1,0 +1,10 @@
+mutation($inst: InstanceInput!){
+  updateInstance(instance: $inst){
+   id
+   name
+   parameters
+   component {
+   	componentId 
+  }
+}
+}
