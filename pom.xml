@@ -6,19 +6,43 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.2.0.RELEASE</version>
+		<version>2.2.1.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>org.raspinloop.web</groupId>
 	<artifactId>ria-model-storage-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>ria-model-storage-service</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Storage service for Raspinloop Rich Internet Applicaton </description>
 
 	<properties>
 		<java.version>1.8</java.version>
 		<spring-cloud.version>Hoxton.M3</spring-cloud.version>
 	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>com.google.cloud.tools</groupId>
+				<artifactId>jib-maven-plugin</artifactId>
+				<version>1.8.0</version>
+				<configuration>
+					<to>
+						<image>docker.io/raspinloop/model-storage-service</image>
+						<auth>
+					      <username>${env.DOCKER_USER}</username>
+					      <password>${env.DOCKER_PASS}</password>
+					    </auth>
+					</to>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -81,16 +105,16 @@
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>			
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
-			</dependency>	
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>
@@ -105,14 +129,7 @@
 		</dependencies>
 	</dependencyManagement>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
+
 
 	<repositories>
 		<repository>
