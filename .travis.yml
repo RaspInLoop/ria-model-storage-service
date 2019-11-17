@@ -11,12 +11,12 @@ env:
 script:
 - mvn package clean compile
 deploy:
-  provider: script
-  - on:
-    all_branches: true
-    tags: false    
+  - provider: script
+    on:
+      all_branches: true
+      tags: false    
     script: mvn jib:build -Dimage=docker.io/raspinloop/model-storage-service:latest
-  - on:
-    tags: true
-    provider: script
+  - provider: script
+    on:
+      tags: true
     script: mvn jib:build -Dimage=docker.io/raspinloop/model-storage-service:$GIT_TAG_VERSION
