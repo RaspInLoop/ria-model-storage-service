@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: model-storage-service
+  cloud:
+    config:
+      uri: http://raspinloop-config-server:8888
+      fail-fast: true
+      retry:
+        max-attempts: 20

@@ -34,9 +34,9 @@
 					<to>
 						<image>docker.io/raspinloop/model-storage-service</image>
 						<auth>
-					      <username>${env.DOCKER_USER}</username>
-					      <password>${env.DOCKER_PASS}</password>
-					    </auth>
+							<username>${env.DOCKER_USER}</username>
+							<password>${env.DOCKER_PASS}</password>
+						</auth>
 					</to>
 				</configuration>
 			</plugin>
@@ -114,6 +114,14 @@
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.retry</groupId>
+			<artifactId>spring-retry</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
 		</dependency>
 	</dependencies>
 
