@@ -2,7 +2,6 @@ package org.raspinloop.web.riamodelstorageservice;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Collection;
@@ -35,6 +34,8 @@ class ComponentMutationTest {
 	@MockBean
 	private InstanceStorageService instanceService;	
 
+	@MockBean
+	private PackageStorageService packageService;
 
 	@Test
 	void testDeleteNotExistingComponent() throws Exception {

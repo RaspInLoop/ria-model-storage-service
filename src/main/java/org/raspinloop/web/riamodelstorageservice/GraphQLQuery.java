@@ -16,6 +16,9 @@ public class GraphQLQuery implements GraphQLQueryResolver {
 
 	@Autowired
 	ComponentStorageService componentService;
+	
+	@Autowired
+	PackageStorageService packageService;
 
 	@Autowired
 	InstanceStorageService instanceService;
@@ -31,6 +34,18 @@ public class GraphQLQuery implements GraphQLQueryResolver {
 		return entity;
 	}
 
+	public Collection<org.raspinloop.web.riamodelstorageservice.db.Package> getPackages() {
+		Set<org.raspinloop.web.riamodelstorageservice.db.Package> entities = new HashSet<>();
+		packageService.getPackages().forEach(entities::add);
+		return entities;
+	}
+	
+	public org.raspinloop.web.riamodelstorageservice.db.Package getPackage(String packageId) {
+		org.raspinloop.web.riamodelstorageservice.db.Package entity = packageService.getPackage(packageId);
+		return entity;
+	}
+
+	
 	public Instance getInstance(Long id) {
 		Instance instance = instanceService.getInstance(id);		
 		return instance;

@@ -2,6 +2,7 @@ package org.raspinloop.web.riamodelstorageservice.db;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -10,10 +11,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
+@EqualsAndHashCode(exclude="packageOwner")
 @Entity
 public class Component {
 
@@ -21,6 +25,10 @@ public class Component {
 	}
 	private @Id @GeneratedValue Long id;
 	private String componentId;
+	
+	@ManyToOne(cascade={CascadeType.ALL})
+	@JoinColumn(name="package_id")
+	private Package packageOwner;
 	
 	@Lob
 	private String description;

@@ -2,7 +2,6 @@ package org.raspinloop.web.riamodelstorageservice;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
@@ -11,7 +10,6 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -39,7 +37,10 @@ class ComponentQueryTest {
 	private ComponentStorageService componentService;
 
 	@MockBean
-	private InstanceStorageService instanceService;	
+	private InstanceStorageService instanceService;
+	
+	@MockBean
+	private PackageStorageService packageService;	
 
 	@Test
 	void testGetUnknownComponent() throws Exception {

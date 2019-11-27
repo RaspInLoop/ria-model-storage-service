@@ -31,6 +31,9 @@ class InstanceQueryTest {
 	@MockBean
 	private InstanceStorageService instanceService;	
 
+	@MockBean
+	private PackageStorageService packageService;
+	
 	@Test
 	void testGetUnknownInstance() throws Exception {
 

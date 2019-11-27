@@ -17,4 +17,9 @@ public class ServiceTestConfiguration {
 	InstanceStorageService instanceService() {
 		return new InstanceStorageService();
 	}
+	
+	@Bean
+	PackageStorageService packageService() {
+		return new PackageStorageService();
+	}
 }

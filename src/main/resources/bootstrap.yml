@@ -3,6 +3,7 @@ spring:
     name: model-storage-service
   cloud:
     config:
+      enabled: true
       uri: http://raspinloop-config-server:8888
       fail-fast: true
       retry:

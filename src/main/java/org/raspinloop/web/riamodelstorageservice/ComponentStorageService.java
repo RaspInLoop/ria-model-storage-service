@@ -1,7 +1,5 @@
 package org.raspinloop.web.riamodelstorageservice;
 
-import java.util.Set;
-
 import org.raspinloop.web.riamodelstorageservice.db.Component;
 import org.raspinloop.web.riamodelstorageservice.db.ComponentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +23,7 @@ public class ComponentStorageService {
 		Component comp = repo.findBycomponentId(component.getComponentId());	
 		if (comp != null) {
 			Long id = comp.getId();
-			comp = component;
+			comp = component; // TODO update only if not null
 			comp.setId(id);
 			return repo.save(comp);
 		}

@@ -2,16 +2,12 @@ package org.raspinloop.web.riamodelstorageservice;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
-
-import java.util.Collection;
 
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
-import org.raspinloop.web.riamodelstorageservice.db.Component;
 import org.raspinloop.web.riamodelstorageservice.db.Instance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -36,6 +32,8 @@ class InstanceMutationTest {
 	@MockBean
 	private InstanceStorageService instanceService;	
 
+	@MockBean
+	private PackageStorageService packageService;
 
 	@Test
 	void testDeleteNotExistingInstance() throws Exception {

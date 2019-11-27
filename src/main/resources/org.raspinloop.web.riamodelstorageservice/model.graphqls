@@ -1,3 +1,12 @@
+type Package {
+ 	id: ID!
+    packageId: String!
+    description: String
+    svgIcon: String!
+    packages: [Package!]!
+    components: [Component!]!
+}
+
 type Component {
     id: ID!
     componentId: String!
@@ -6,8 +15,7 @@ type Component {
     svgIcon: String!
     htmlDocumentation: String
     parameters: String
-    portGroups: [PortGroup!]!
-    
+    portGroups: [PortGroup!]!    
 }
 
 type Instance {
@@ -33,9 +41,20 @@ type Port {
  
 # The Root Query for the application
 type Query {
+	packages: [Package!]!
+	package(packageId: String!):Package
     component(componentId: String!): Component
     components: [Component!]!
-    instance(id : ID!): Instance
+    instance(id : ID!): Instance    
+}
+ 
+input PackageInput {
+    id: ID
+    packageId: String!
+    description: String   
+    svgIcon: String
+    subPackages: [PackageInput!]
+    componentIds: [String!]
 }
  
 input ComponentInput {
@@ -46,8 +65,7 @@ input ComponentInput {
     svgIcon: String!
     htmlDocumentation: String
     parameters: String
-    portGroups: [PortGroupInput!]
-    
+    portGroups: [PortGroupInput!]    
 }
 
 input  InstanceInput {
@@ -72,6 +90,8 @@ input  PortInput {
  
 # The Root Mutation for the application
 type Mutation {
+    deletePackage(packageId: String!): Boolean!
+    updatePackage(package: PackageInput!) : Package!
     deleteComponent(componentId: String!): Boolean!
     updateComponent(component: ComponentInput!) : Component!
     createInstance(name: String!, componentId: String!) : ID!
