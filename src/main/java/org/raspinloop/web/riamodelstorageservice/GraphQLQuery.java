@@ -8,10 +8,12 @@ import org.raspinloop.web.riamodelstorageservice.db.Component;
 import org.raspinloop.web.riamodelstorageservice.db.Instance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 
 @Controller
+@Transactional
 public class GraphQLQuery implements GraphQLQueryResolver {
 
 	@Autowired

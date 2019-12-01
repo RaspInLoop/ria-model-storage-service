@@ -1,9 +1,7 @@
 package org.raspinloop.web.riamodelstorageservice;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -17,10 +15,12 @@ import org.raspinloop.web.riamodelstorageservice.graphqls.InstanceInput;
 import org.raspinloop.web.riamodelstorageservice.graphqls.PackageInput;
 import org.raspinloop.web.riamodelstorageservice.graphqls.PortGroupInput;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 
 @Controller
+@Transactional
 public class GraphQLMutation implements GraphQLMutationResolver {
 
 	private ComponentStorageService componentService;
