@@ -1,0 +1,8 @@
+query($pack: String!){
+ package(packageId: $pack){
+    id
+    packageId
+    description
+    svgIcon    
+  }
+} 

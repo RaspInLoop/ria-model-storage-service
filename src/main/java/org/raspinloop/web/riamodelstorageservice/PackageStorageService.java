@@ -20,15 +20,26 @@ public class PackageStorageService {
 		return repo.findByPackageId(packageId);		
 	}
 
-	public boolean deletePackage(String componentId) {
-		return repo.deleteByPackageId(componentId) != 0;		
+	public boolean deletePackage(String packageId) {
+		return repo.deleteByPackageId(packageId) != 0;		
 	}
 
 	public Package updatePackage(Package packArg) {
 		Package pack = repo.findByPackageId(packArg.getPackageId());	
 		if (pack != null) {
 			Long id = pack.getId();
-			pack = packArg; // TODO update only if not null
+			if (packArg.getDescription() != null)
+				pack.setDescription(packArg.getDescription());
+			if (packArg.getSvgIcon() != null)
+				pack.setSvgIcon(packArg.getSvgIcon());
+			if (packArg.getComponents() != null)
+				pack.setComponents(packArg.getComponents());
+			if (packArg.getPackageId() != null)
+				pack.setPackageId(packArg.getPackageId());
+			if (packArg.getPackages() != null)
+				pack.setPackages(packArg.getPackages());
+			if (packArg.getParent() != null)
+				pack.setParent(packArg.getParent());
 			pack.setId(id);
 			return repo.save(pack);
 		}

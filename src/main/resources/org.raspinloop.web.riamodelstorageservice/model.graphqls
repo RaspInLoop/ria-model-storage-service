@@ -53,7 +53,7 @@ input PackageInput {
     packageId: String!
     description: String   
     svgIcon: String
-    subPackages: [PackageInput!]
+    packages: [PackageInput!]
     componentIds: [String!]
 }
  
@@ -91,7 +91,7 @@ input  PortInput {
 # The Root Mutation for the application
 type Mutation {
     deletePackage(packageId: String!): Boolean!
-    updatePackage(package: PackageInput!) : Package!
+    updatePackage(pack: PackageInput!) : Package!
     deleteComponent(componentId: String!): Boolean!
     updateComponent(component: ComponentInput!) : Component!
     createInstance(name: String!, componentId: String!) : ID!
