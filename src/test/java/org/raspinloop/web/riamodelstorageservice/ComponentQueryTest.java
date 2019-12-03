@@ -41,7 +41,7 @@ class ComponentQueryTest {
 	
 	@MockBean
 	private PackageStorageService packageService;	
-
+	
 	@Test
 	void testGetUnknownComponent() throws Exception {
 

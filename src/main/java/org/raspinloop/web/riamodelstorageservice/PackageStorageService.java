@@ -4,17 +4,18 @@ import org.raspinloop.web.riamodelstorageservice.db.Component;
 import org.raspinloop.web.riamodelstorageservice.db.ComponentRepository;
 import org.raspinloop.web.riamodelstorageservice.db.Package;
 import org.raspinloop.web.riamodelstorageservice.db.PackageRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class PackageStorageService {
 
-	@Autowired
-	private PackageRepository repo;
-	
-	@Autowired
-	private ComponentRepository compRepo;
+
+	private final PackageRepository repo;
+
+	private final ComponentRepository compRepo;	
 	
 	public Package getPackage(String packageId) {
 		return repo.findByPackageId(packageId);		

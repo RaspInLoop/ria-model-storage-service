@@ -2,22 +2,18 @@ package org.raspinloop.web.riamodelstorageservice.graphqls;
 
 import java.util.Set;
 
-import org.raspinloop.web.riamodelstorageservice.PackageStorageService;
-import org.raspinloop.web.riamodelstorageservice.db.Package;
 import org.raspinloop.web.riamodelstorageservice.db.Component;
+import org.raspinloop.web.riamodelstorageservice.db.Package;
 
 import com.coxautodev.graphql.tools.GraphQLResolver;
 
-@org.springframework.stereotype.Component
-public class PackageResolver implements GraphQLResolver<Package> {
-		
-	PackageStorageService service;
-	
-    public PackageResolver(PackageStorageService service) {
-		this.service = service;
-	}
+import lombok.RequiredArgsConstructor;
 
-    public long getId(Package pack) {
+@org.springframework.stereotype.Component
+@RequiredArgsConstructor
+public class PackageResolver implements GraphQLResolver<Package> {
+
+	public long getId(Package pack) {
     	return pack.getId();
     }
     
@@ -34,7 +30,7 @@ public class PackageResolver implements GraphQLResolver<Package> {
     }
 
 	public Set<Package> getPackages(Package pack) {
-        return pack.getPackages();
+		return pack.getPackages();		        
     }
 	
 	public Set<Component> getComponents(Package pack) {

@@ -1,25 +1,27 @@
 package org.raspinloop.web.riamodelstorageservice;
 
+
+import org.raspinloop.web.riamodelstorageservice.db.ComponentRepository;
+import org.raspinloop.web.riamodelstorageservice.db.InstanceRepository;
+import org.raspinloop.web.riamodelstorageservice.db.PackageRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @Configuration
-@EnableJpaAuditing
 public class ServiceTestConfiguration {
 	
 	@Bean
-	ComponentStorageService componentService() {
-		return new ComponentStorageService();
+	ComponentStorageService componentService(ComponentRepository componentRepo) {
+		return new ComponentStorageService(componentRepo);
 	}
 	
 	@Bean
-	InstanceStorageService instanceService() {
-		return new InstanceStorageService();
+	InstanceStorageService instanceService(ComponentRepository componentRepo, InstanceRepository instanceRepo) {
+		return new InstanceStorageService(componentRepo, instanceRepo);
 	}
 	
 	@Bean
-	PackageStorageService packageService() {
-		return new PackageStorageService();
+	PackageStorageService packageService(PackageRepository packageRepo, ComponentRepository componentRepo) {
+		return new PackageStorageService(packageRepo, componentRepo);
 	}
 }

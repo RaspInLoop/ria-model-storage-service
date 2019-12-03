@@ -5,9 +5,13 @@ import org.raspinloop.web.riamodelstorageservice.db.Instance;
 
 import com.coxautodev.graphql.tools.GraphQLResolver;
 
+import lombok.RequiredArgsConstructor;
+
 @org.springframework.stereotype.Component
+@RequiredArgsConstructor
 public class InstanceResolver implements GraphQLResolver<Instance> {			
 
+	
     public long getId(Instance inst) {
     	return inst.getId();
     }
@@ -21,6 +25,6 @@ public class InstanceResolver implements GraphQLResolver<Instance> {
     }
     
     public Component getComponent(Instance inst) {
-    	return inst.getComponentRef();
+    	return inst.getComponentRef();    	
     }
 }

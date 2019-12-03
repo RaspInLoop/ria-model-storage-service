@@ -7,7 +7,6 @@ import static org.junit.Assert.assertTrue;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
-import org.raspinloop.web.riamodelstorageservice.db.Instance;
 import org.raspinloop.web.riamodelstorageservice.db.Package;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;

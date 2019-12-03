@@ -2,7 +2,6 @@ package org.raspinloop.web.riamodelstorageservice.graphqls;
 
 import java.util.Set;
 
-import org.raspinloop.web.riamodelstorageservice.ComponentStorageService;
 import org.raspinloop.web.riamodelstorageservice.db.Component;
 import org.raspinloop.web.riamodelstorageservice.db.PortGroup;
 
@@ -11,12 +10,6 @@ import com.coxautodev.graphql.tools.GraphQLResolver;
 @org.springframework.stereotype.Component
 public class ComponentResolver implements GraphQLResolver<Component> {
 		
-	ComponentStorageService service;
-	
-    public ComponentResolver(ComponentStorageService service) {
-		this.service = service;
-	}
-
     public long getId(Component comp) {
     	return comp.getId();
     }

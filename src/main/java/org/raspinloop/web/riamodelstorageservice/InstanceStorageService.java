@@ -6,19 +6,20 @@ import org.raspinloop.web.riamodelstorageservice.db.Component;
 import org.raspinloop.web.riamodelstorageservice.db.ComponentRepository;
 import org.raspinloop.web.riamodelstorageservice.db.Instance;
 import org.raspinloop.web.riamodelstorageservice.db.InstanceRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class InstanceStorageService {
 
-	@Autowired
-	private ComponentRepository componentRepo;
-
-	@Autowired
-	private InstanceRepository instanceRepo;
+	
+	private final ComponentRepository componentRepo;
+	
+	private final InstanceRepository instanceRepo;
 
 	public Long createInstance(String componentId, String name) {
 		Component comp = componentRepo.findBycomponentId(componentId);

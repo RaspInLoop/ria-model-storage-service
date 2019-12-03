@@ -2,14 +2,15 @@ package org.raspinloop.web.riamodelstorageservice;
 
 import org.raspinloop.web.riamodelstorageservice.db.Component;
 import org.raspinloop.web.riamodelstorageservice.db.ComponentRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
-public class ComponentStorageService {
+import lombok.RequiredArgsConstructor;
 
-	@Autowired
-	private ComponentRepository repo;
+@Service
+@RequiredArgsConstructor
+public class ComponentStorageService {
+	
+	private final ComponentRepository repo;
 	
 	public Component getComponent(String componentId) {
 		return repo.findBycomponentId(componentId);		
