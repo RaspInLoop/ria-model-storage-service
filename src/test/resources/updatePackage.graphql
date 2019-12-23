@@ -1,10 +1,6 @@
 mutation($pack: PackageInput!){
   updatePackage(pack: $pack){
    id
-   packageId  
-   packages {
-    id
-   	packageId   	
+   packageId  	 
   }
-}
 }

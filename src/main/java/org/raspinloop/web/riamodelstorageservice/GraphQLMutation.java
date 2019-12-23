@@ -1,7 +1,6 @@
 package org.raspinloop.web.riamodelstorageservice;
 
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -94,12 +93,10 @@ public class GraphQLMutation implements GraphQLMutationResolver {
 				stored = packageService.linkComponent(stored, compId);
 			}		
 		}
-		if (pack.getPackages() != null) {
-			Set<Package> storedPackages = new HashSet<>();
-			for (PackageInput subPack : pack.getPackages()) {				
-				storedPackages.add(this.updatePackage(subPack));
-			}	
-			stored.setPackages(storedPackages);
+		if (pack.getPackages() != null) {			
+			for (PackageInput subPack : pack.getPackages()) {	
+				stored = packageService.linkPackage(stored, this.updatePackage(subPack));				
+			}				
 		}
 		return stored;
 	}

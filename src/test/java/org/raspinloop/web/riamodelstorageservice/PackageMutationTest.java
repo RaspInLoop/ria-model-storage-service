@@ -105,17 +105,44 @@ class PackageMutationTest {
 
 		// given... nothing... ;-)
 		//Use ArgumentCaptor to capture the parameter value
+		
 		ArgumentCaptor<Package> param = ArgumentCaptor.forClass(Package.class);
 		
 		Mockito.when(packageService.updatePackage(
 					 
 					param.capture())).thenAnswer((invocation) -> 
 					{						
-						Package pack = param.getValue();
-						pack.setId(3L);						
+						Package pack = new Package();
+	
+						if (param.getValue().getDescription() != null)
+							pack.setDescription(param.getValue().getDescription());
+						if (param.getValue().getSvgIcon() != null)
+							pack.setSvgIcon(param.getValue().getSvgIcon());
+						if (param.getValue().getComponents() != null)
+							pack.setComponents(param.getValue().getComponents());
+						if (param.getValue().getPackageId() != null)
+							pack.setPackageId(param.getValue().getPackageId());
+						if (param.getValue().getPackages() != null)
+							pack.setPackages(param.getValue().getPackages());
+						if (param.getValue().getParent() != null)
+							pack.setParent(param.getValue().getParent());	
+						
+						pack.setId((long)pack.hashCode()); //trick to have a unique Id for each record 						
 						return pack;
 					});
 		
+		ArgumentCaptor<Package> storedParam = ArgumentCaptor.forClass(Package.class);
+		ArgumentCaptor<Package> packageParam = ArgumentCaptor.forClass(Package.class);
+		Mockito.when(packageService.linkPackage(				 
+					storedParam.capture(),
+					packageParam.capture()))
+				.thenAnswer((invocation) -> 
+				{						
+					Package stored = storedParam.getValue();
+					stored.getPackages().add(packageParam.getValue());
+					packageParam.getValue().setParent(stored);
+					return stored;
+				});
 		// then
 		ObjectMapper mapper = new ObjectMapper();
 		
@@ -145,9 +172,8 @@ class PackageMutationTest {
 		GraphQLResponse response = graphQLTestTemplate.perform("updatePackage.graphql", variables);
 
 		assertTrue(response.getStatusCode().is2xxSuccessful());
-		assertEquals((Long)3L, response.get("$.data.updatePackage.id", Long.class));
 		assertEquals("Modelica.Electrical.Digital.Gates" , response.get("$.data.updatePackage.packageId"));
-		assertFalse(response.get("$.data.updatePackage.packages[?(@.packageId=='Modelica.Electrical.Digital.Gates.Ands')]", Collection.class).isEmpty());
-		assertFalse(response.get("$.data.updatePackage.packages[?(@.packageId=='Modelica.Electrical.Digital.Gates.Ors')]", Collection.class).isEmpty());
+		Mockito.verify(packageService, Mockito.times(3)).updatePackage(Mockito.any());
+		Mockito.verify(packageService, Mockito.times(2)).linkPackage(Mockito.any(), Mockito.any());		
 	}
 }

@@ -28,7 +28,7 @@ public class PackageStorageService {
 	public Package updatePackage(Package packArg) {
 		Package pack = repo.findByPackageId(packArg.getPackageId());	
 		if (pack != null) {
-			Long id = pack.getId();
+			pack.setId(pack.getId());
 			if (packArg.getDescription() != null)
 				pack.setDescription(packArg.getDescription());
 			if (packArg.getSvgIcon() != null)
@@ -40,8 +40,7 @@ public class PackageStorageService {
 			if (packArg.getPackages() != null)
 				pack.setPackages(packArg.getPackages());
 			if (packArg.getParent() != null)
-				pack.setParent(packArg.getParent());
-			pack.setId(id);
+				pack.setParent(packArg.getParent());			
 			return repo.save(pack);
 		}
 		else {
@@ -61,5 +60,11 @@ public class PackageStorageService {
 			comp.setPackageOwner(stored);
 		}
 		return stored;		
+	}
+
+	public Package linkPackage(Package stored, Package updatePackage) {
+		stored.getPackages().add(updatePackage);
+		updatePackage.setParent(stored);
+		return stored;
 	}
 }

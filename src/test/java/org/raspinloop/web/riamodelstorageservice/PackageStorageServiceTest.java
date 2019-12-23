@@ -163,6 +163,44 @@ public class PackageStorageServiceTest {
 		assertThat(found.getPackageId()).isEqualTo("Modelica.Electrical.Digital.Gates");
 	}
 	
+
+	@Test
+	public void linkPackageTest() {
+		Package gate = new Package();	
+		gate.setPackageId("Modelica.Electrical.Digital.Gates");	
+		entityManager.persist(gate);
+		
+		Package digital = new Package();	
+		digital.setPackageId("Modelica.Electrical.Digital");		
+		entityManager.persist(digital);
+		
+		Package electrical = new Package();	
+		electrical.setPackageId("Modelica.Electrical");		
+		entityManager.persist(electrical);
+		
+		Package modelica = new Package();	
+		modelica.setPackageId("Modelica");			
+		entityManager.persist(modelica);
+		
+		// when
+		service.linkPackage(modelica, electrical);
+		service.linkPackage(electrical, digital);
+		service.linkPackage(digital, gate);
+
+		// then
+		Package found = service.getPackage("Modelica");
+		assertThat(found.getPackageId()).isEqualTo("Modelica");
+		
+		found = found.getPackages().iterator().next();
+		assertThat(found.getPackageId()).isEqualTo("Modelica.Electrical");
+		
+		found = found.getPackages().iterator().next();
+		assertThat(found.getPackageId()).isEqualTo("Modelica.Electrical.Digital");
+		
+		found = found.getPackages().iterator().next();
+		assertThat(found.getPackageId()).isEqualTo("Modelica.Electrical.Digital.Gates");
+	}
+	
 	@Test
 	public void linkComponentTest() {
 		//given
