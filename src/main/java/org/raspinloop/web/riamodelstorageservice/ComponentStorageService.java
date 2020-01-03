@@ -2,6 +2,8 @@ package org.raspinloop.web.riamodelstorageservice;
 
 import org.raspinloop.web.riamodelstorageservice.db.Component;
 import org.raspinloop.web.riamodelstorageservice.db.ComponentRepository;
+import org.raspinloop.web.riamodelstorageservice.db.PortGroupRepository;
+import org.raspinloop.web.riamodelstorageservice.db.PortRepository;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -9,28 +11,57 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class ComponentStorageService {
-	
+
 	private final ComponentRepository repo;
-	
+	private final PortGroupRepository pgRepo;
+	private final PortRepository prepo;
+
 	public Component getComponent(String componentId) {
-		return repo.findBycomponentId(componentId);		
+		return repo.findBycomponentId(componentId);
 	}
 
 	public boolean deleteComponent(String componentId) {
-		return repo.deleteByComponentId(componentId) != 0;		
+		return repo.deleteByComponentId(componentId) != 0;
 	}
 
 	public Component updateComponent(Component component) {
-		Component comp = repo.findBycomponentId(component.getComponentId());	
+		Component comp = repo.findBycomponentId(component.getComponentId());
 		if (comp != null) {
 			Long id = comp.getId();
-			comp = component; // TODO update only if not null
+			comp = copyIfNotNull(component);
 			comp.setId(id);
-			return repo.save(comp);
+		} else {
+			comp = component;
 		}
-		else {
-			return repo.save(component);
-		}		
+		// save/update portGroup/ports
+		if (comp.getPortGroups() != null) {
+			comp.getPortGroups().forEach(pg -> {
+				pg.getPorts().forEach(prepo::save);
+				pgRepo.save(pg);
+			});
+		}
+		return repo.save(comp);
+	}
+
+	private Component copyIfNotNull(Component component) {
+		Component comp = new Component();
+		if (component.getDescription() != null) {
+			comp.setDescription(component.getDescription());
+		}
+		if (component.getSvgContent() != null) {
+			comp.setSvgContent(component.getSvgContent());
+		}
+		if (component.getSvgIcon() != null) {
+			comp.setSvgIcon(component.getSvgIcon());
+		}
+		if (component.getHtmlDocumentation() != null) {
+			comp.setHtmlDocumentation(component.getHtmlDocumentation());
+		}
+		if (component.getParameters() != null) {
+			comp.setParameters(component.getParameters());
+		}
+		comp.setPortGroups(component.getPortGroups());
+		return comp;
 	}
 
 	public Iterable<Component> getComponents() {

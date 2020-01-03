@@ -27,8 +27,7 @@ public class PackageStorageService {
 
 	public Package updatePackage(Package packArg) {
 		Package pack = repo.findByPackageId(packArg.getPackageId());	
-		if (pack != null) {
-			pack.setId(pack.getId());
+		if (pack != null) {			
 			if (packArg.getDescription() != null)
 				pack.setDescription(packArg.getDescription());
 			if (packArg.getSvgIcon() != null)

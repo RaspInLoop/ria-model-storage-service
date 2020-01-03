@@ -4,6 +4,8 @@ package org.raspinloop.web.riamodelstorageservice;
 import org.raspinloop.web.riamodelstorageservice.db.ComponentRepository;
 import org.raspinloop.web.riamodelstorageservice.db.InstanceRepository;
 import org.raspinloop.web.riamodelstorageservice.db.PackageRepository;
+import org.raspinloop.web.riamodelstorageservice.db.PortGroupRepository;
+import org.raspinloop.web.riamodelstorageservice.db.PortRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -11,8 +13,8 @@ import org.springframework.context.annotation.Configuration;
 public class ServiceTestConfiguration {
 	
 	@Bean
-	ComponentStorageService componentService(ComponentRepository componentRepo) {
-		return new ComponentStorageService(componentRepo);
+	ComponentStorageService componentService(ComponentRepository componentRepo, PortGroupRepository portGroupRepo, PortRepository portRepo) {
+		return new ComponentStorageService(componentRepo, portGroupRepo, portRepo);
 	}
 	
 	@Bean
