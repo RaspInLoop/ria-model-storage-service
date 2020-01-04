@@ -35,7 +35,7 @@ type Port {
 	portId: String!
 	x : Int!
 	y : Int!
-	// missing orientation
+
     description: String
 }
 
