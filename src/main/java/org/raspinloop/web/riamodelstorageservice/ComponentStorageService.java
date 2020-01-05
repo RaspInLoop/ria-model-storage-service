@@ -36,8 +36,12 @@ public class ComponentStorageService {
 		// save/update portGroup/ports
 		if (comp.getPortGroups() != null) {
 			comp.getPortGroups().forEach(pg -> {
-				pg.getPorts().forEach(prepo::save);
 				pgRepo.save(pg);
+				pg.getPorts().forEach( p -> {
+					p.setGroup(pg);
+					prepo.save(p);
+				});
+				
 			});
 		}
 		return repo.save(comp);

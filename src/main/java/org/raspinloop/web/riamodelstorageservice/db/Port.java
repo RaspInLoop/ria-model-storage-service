@@ -9,9 +9,11 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
 @Entity
+@EqualsAndHashCode(exclude="group")
 public class Port {
 
 	private @Id @GeneratedValue Long id;
