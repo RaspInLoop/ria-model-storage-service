@@ -13,8 +13,8 @@ import org.springframework.context.annotation.Configuration;
 public class ServiceTestConfiguration {
 	
 	@Bean
-	ComponentStorageService componentService(ComponentRepository componentRepo, PortGroupRepository portGroupRepo, PortRepository portRepo) {
-		return new ComponentStorageService(componentRepo, portGroupRepo, portRepo);
+	ComponentStorageService componentService(ComponentRepository componentRepo, PackageRepository packagerepo,  PortGroupRepository portGroupRepo, PortRepository portRepo) {
+		return new ComponentStorageService(componentRepo, packagerepo, portGroupRepo, portRepo);
 	}
 	
 	@Bean
